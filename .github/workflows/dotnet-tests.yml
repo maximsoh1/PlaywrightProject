@@ -1,0 +1,46 @@
+name: .NET Tests
+
+# Workflow запускается при:
+# - push в ветки main и Tests
+# - создании pull request в ветку main
+on:
+  push:
+    branches: 
+      - main
+      - Tests
+  pull_request:
+    branches: 
+      - main
+
+jobs:
+  test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore VSProject.slnx
+      
+    - name: Build solution
+      run: dotnet build VSProject.slnx --no-restore --configuration Release
+    
+    - name: Ensure Playwright browsers are installed
+      run: pwsh VSProject/bin/Release/net10.0/playwright.ps1 install --with-deps chromium
+      
+    - name: Run tests
+      run: dotnet test VSProject.slnx --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: '**/TestResults/*.trx'
