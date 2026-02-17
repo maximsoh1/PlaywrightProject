@@ -1,0 +1,134 @@
+name: Manual Test Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_filter:
+        description: 'Test filter (example: category=smoke or FullyQualifiedName~Shopping)'
+        required: false
+        type: string
+        default: ''
+      browser:
+        description: 'Browser to test'
+        required: true
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
+          - all
+        default: 'chromium'
+      headless:
+        description: 'Run in headless mode'
+        required: true
+        type: boolean
+        default: true
+      environment:
+        description: 'Test environment'
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+          - local
+        default: 'staging'
+
+jobs:
+  test:
+    name: Run Custom Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET 10
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+        dotnet-quality: 'preview'
+    
+    - name: Restore dependencies
+      run: dotnet restore VSProject/VSProject.csproj
+    
+    - name: Build project
+      run: dotnet build VSProject/VSProject.csproj --no-restore --configuration Release
+    
+    - name: Install Playwright browsers
+      run: |
+        cd VSProject
+        if [ "${{ inputs.browser }}" == "all" ]; then
+          pwsh bin/Release/net10.0/playwright.ps1 install --with-deps
+        else
+          pwsh bin/Release/net10.0/playwright.ps1 install --with-deps ${{ inputs.browser }}
+        fi
+    
+    - name: Run tests
+      run: |
+        TEST_COMMAND="dotnet test VSProject/VSProject.csproj --no-build --configuration Release --logger \"console;verbosity=detailed\""
+        
+        if [ -n "${{ inputs.test_filter }}" ]; then
+          TEST_COMMAND="$TEST_COMMAND --filter \"${{ inputs.test_filter }}\""
+        fi
+        
+        echo "Executing: $TEST_COMMAND"
+        eval $TEST_COMMAND
+      env:
+        BROWSER: ${{ inputs.browser }}
+        HEADLESS: ${{ inputs.headless }}
+        TEST_ENVIRONMENT: ${{ inputs.environment }}
+      continue-on-error: true
+    
+    - name: Generate Allure report
+      uses: simple-elf/allure-report-action@v1.7
+      if: always()
+      with:
+        allure_results: VSProject/bin/Release/net10.0/allure-results
+        allure_report: allure-report
+        allure_history: allure-history
+    
+    - name: Upload Allure report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: allure-report-${{ github.run_number }}
+        path: allure-report
+        retention-days: 30
+    
+    - name: Upload Allure results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: allure-results-${{ github.run_number }}
+        path: VSProject/bin/Release/net10.0/allure-results
+        retention-days: 30
+    
+    - name: Upload screenshots
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: screenshots-${{ github.run_number }}
+        path: VSProject/bin/Release/net10.0/screenshots
+        retention-days: 7
+    
+    - name: Upload videos
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: videos-${{ github.run_number }}
+        path: VSProject/bin/Release/net10.0/videos
+        retention-days: 7
+    
+    - name: Test Summary
+      if: always()
+      run: |
+        echo "## Test Execution Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **Browser:** ${{ inputs.browser }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Headless:** ${{ inputs.headless }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Environment:** ${{ inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Filter:** ${{ inputs.test_filter || 'None' }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Run Number:** ${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "[View Artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY

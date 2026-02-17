@@ -1,0 +1,13 @@
+# Visual Testing Baselines
+
+# Ignore temporary actual screenshots (created during test runs)
+*-actual.png
+
+# Ignore diff images (generated when tests fail)
+*-diff.png
+
+# Keep baseline images in Git for team collaboration
+# These are the "golden" images that tests compare against
+*.png
+!*-actual.png
+!*-diff.png

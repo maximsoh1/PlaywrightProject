@@ -1,0 +1,12 @@
+{
+  "isReqnrollProject": true,
+  "projectName": "VSProject",
+  "projectPlatformTarget": {
+    "targetFramework": "net10.0",
+    "targetFrameworkMoniker": ".NETCoreApp,Version=v10.0"
+  },
+  "reqnrollVersion": "3.3.3",
+  "reqnrollConfigurationPath": "reqnroll.json",
+  "specFlowGeneratorFolder": "obj\\Debug\\net10.0",
+  "projectFolder": "."
+}

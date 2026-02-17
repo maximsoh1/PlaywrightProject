@@ -1,0 +1,84 @@
+name: Test Request
+description: Suggest a new test or scenario
+title: "[Test Request]: "
+labels: ["enhancement", "test-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion! Describe what test needs to be added.
+
+  - type: input
+    id: feature
+    attributes:
+      label: What functionality needs to be tested?
+      description: Brief description of the feature
+      placeholder: ex. Adding product to favorites
+    validations:
+      required: true
+
+  - type: dropdown
+    id: test-type
+    attributes:
+      label: Test Type
+      options:
+        - E2E test (full scenario)
+        - BDD scenario (Gherkin)
+        - Visual test (screenshots)
+        - Accessibility test
+        - API test
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Critical (blocks release)
+        - High (important functionality)
+        - Medium (nice to have)
+        - Low (when there's time)
+    validations:
+      required: true
+
+  - type: textarea
+    id: scenario
+    attributes:
+      label: Test Scenario
+      description: Describe the test steps
+      placeholder: |
+        Given user is authenticated
+        When user clicks on "Favorites" button
+        And adds product to favorites
+        Then product appears in favorites list
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-result
+    attributes:
+      label: Expected Result
+      description: What should happen?
+      placeholder: Product is saved in favorites and available after page reload
+    validations:
+      required: true
+
+  - type: input
+    id: test-data
+    attributes:
+      label: Test Data
+      description: What data is needed for the test?
+      placeholder: ex. URL, test user, product
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Information
+      description: Links, examples, screenshots
+      placeholder: |
+        - Link to requirements: ...
+        - Example from another project: ...
+        - UI mockup: ...

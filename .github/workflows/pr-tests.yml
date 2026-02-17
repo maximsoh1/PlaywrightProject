@@ -1,0 +1,118 @@
+name: PR Tests
+
+on:
+  pull_request:
+    branches: [ main, master ]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  test:
+    name: Run PR Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+    - name: Checkout PR code
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+    
+    - name: Setup .NET 10
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+        dotnet-quality: 'preview'
+    
+    - name: Restore dependencies
+      run: dotnet restore VSProject/VSProject.csproj
+    
+    - name: Build project
+      run: dotnet build VSProject/VSProject.csproj --no-restore --configuration Release
+    
+    - name: Install Playwright browsers
+      run: |
+        cd VSProject
+        pwsh bin/Release/net10.0/playwright.ps1 install --with-deps chromium
+    
+    - name: Run tests
+      id: test_run
+      run: |
+        dotnet test VSProject/VSProject.csproj \
+          --no-build \
+          --configuration Release \
+          --logger "trx;LogFileName=test-results.trx" \
+          --logger "console;verbosity=detailed" \
+          --results-directory ./TestResults \
+          --filter "Category!=accessibility"
+      continue-on-error: true
+    
+    - name: Parse test results
+      if: always()
+      id: test_results
+      run: |
+        # Extract test results from TRX file
+        if [ -f "TestResults/test-results.trx" ]; then
+          TOTAL=$(grep -o 'total="[^"]*"' TestResults/test-results.trx | head -1 | grep -o '[0-9]*')
+          PASSED=$(grep -o 'passed="[^"]*"' TestResults/test-results.trx | head -1 | grep -o '[0-9]*')
+          FAILED=$(grep -o 'failed="[^"]*"' TestResults/test-results.trx | head -1 | grep -o '[0-9]*')
+          
+          echo "total=$TOTAL" >> $GITHUB_OUTPUT
+          echo "passed=$PASSED" >> $GITHUB_OUTPUT
+          echo "failed=$FAILED" >> $GITHUB_OUTPUT
+        else
+          echo "total=0" >> $GITHUB_OUTPUT
+          echo "passed=0" >> $GITHUB_OUTPUT
+          echo "failed=0" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Comment PR with results
+      if: always()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const total = '${{ steps.test_results.outputs.total }}' || '0';
+          const passed = '${{ steps.test_results.outputs.passed }}' || '0';
+          const failed = '${{ steps.test_results.outputs.failed }}' || '0';
+          
+          const status = failed === '0' ? '?' : '?';
+          const color = failed === '0' ? '??' : '??';
+          
+          const body = `## ${status} Test Results
+          
+          ${color} **Test Execution Summary:**
+          - ? **Passed:** ${passed}
+          - ? **Failed:** ${failed}
+          - ?? **Total:** ${total}
+          
+          **Details:**
+          - ?? **Browser:** Chromium
+          - ?? **Run:** [View Details](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          
+          ${failed !== '0' ? '?? Please check the failed tests before merging!' : '?? All tests passed! Ready to merge.'}`;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: body
+          });
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results
+        path: TestResults/test-results.trx
+        retention-days: 30
+    
+    - name: Upload Allure results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: allure-results-pr
+        path: VSProject/bin/Release/net10.0/allure-results
+        retention-days: 30
+    
+    - name: Fail job if tests failed
+      if: steps.test_run.outcome == 'failure'
+      run: exit 1
