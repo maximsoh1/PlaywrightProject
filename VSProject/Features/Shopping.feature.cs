@@ -27,8 +27,8 @@ namespace VSProject.Features
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en"), "Features", "2. Complete Shopping Flow", "As a customer\r\nI want to browse products, add them to cart, and checkout\r\nSo that" +
-                " I can complete my purchase", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en"), "Features", "2. Complete Shopping Flow", "As a customer\nI want to browse products, add them to cart, and checkout\nSo that I" +
+                " can complete my purchase", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
 #line 1 "Shopping.feature"
 #line hidden

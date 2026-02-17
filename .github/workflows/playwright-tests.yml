@@ -23,11 +23,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Setup .NET 10
+    - name: Setup .NET 9
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '10.0.x'
-        dotnet-quality: 'preview' # For .NET 10 preview
+        dotnet-version: '9.0.x'
     
     - name: Restore dependencies
       run: dotnet restore VSProject/VSProject.csproj
@@ -38,7 +37,7 @@ jobs:
     - name: Install Playwright browsers
       run: |
         cd VSProject
-        pwsh bin/Release/net10.0/playwright.ps1 install --with-deps chromium
+        pwsh bin/Release/net9.0/playwright.ps1 install --with-deps chromium
     
     - name: Run tests
       run: dotnet test VSProject/VSProject.csproj --no-build --configuration Release --logger "console;verbosity=detailed" --filter "Category!=accessibility"
@@ -53,12 +52,12 @@ jobs:
         path: gh-pages
     
     - name: Build test report
-      uses: simple-elf/allure-report-action@v1.7
+      uses: simple-elf/allure-report-action@v1.9
       if: always()
       with:
         gh_pages: gh-pages
         allure_history: allure-history
-        allure_results: VSProject/bin/Release/net10.0/allure-results
+        allure_results: VSProject/bin/Release/net9.0/allure-results
     
     - name: Publish test report
       uses: peaceiris/actions-gh-pages@v4
@@ -73,7 +72,7 @@ jobs:
       if: always()
       with:
         name: allure-results
-        path: VSProject/bin/Release/net10.0/allure-results
+        path: VSProject/bin/Release/net9.0/allure-results
         retention-days: 30
     
     - name: Upload test screenshots
@@ -81,7 +80,7 @@ jobs:
       if: failure()
       with:
         name: test-screenshots
-        path: VSProject/bin/Release/net10.0/screenshots
+        path: VSProject/bin/Release/net9.0/screenshots
         retention-days: 7
     
     - name: Upload test videos
@@ -89,5 +88,5 @@ jobs:
       if: failure()
       with:
         name: test-videos
-        path: VSProject/bin/Release/net10.0/videos
+        path: VSProject/bin/Release/net9.0/videos
         retention-days: 7

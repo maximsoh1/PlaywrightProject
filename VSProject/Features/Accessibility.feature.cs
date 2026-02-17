@@ -27,8 +27,8 @@ namespace VSProject.Features
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en"), "Features", "3. Accessibility Compliance", "  As a user with disabilities\r\n  I want the website to be accessible\r\n  So that I" +
-                " can use all features without barriers", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en"), "Features", "3. Accessibility Compliance", "  As a user with disabilities\n  I want the website to be accessible\n  So that I c" +
+                "an use all features without barriers", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
 #line 1 "Accessibility.feature"
 #line hidden

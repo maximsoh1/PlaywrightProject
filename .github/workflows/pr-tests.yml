@@ -17,11 +17,10 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.sha }}
     
-    - name: Setup .NET 10
+    - name: Setup .NET 9
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '10.0.x'
-        dotnet-quality: 'preview'
+        dotnet-version: '9.0.x'
     
     - name: Restore dependencies
       run: dotnet restore VSProject/VSProject.csproj
@@ -32,7 +31,7 @@ jobs:
     - name: Install Playwright browsers
       run: |
         cd VSProject
-        pwsh bin/Release/net10.0/playwright.ps1 install --with-deps chromium
+        pwsh bin/Release/net9.0/playwright.ps1 install --with-deps chromium
     
     - name: Run tests
       id: test_run
@@ -110,7 +109,7 @@ jobs:
       if: always()
       with:
         name: allure-results-pr
-        path: VSProject/bin/Release/net10.0/allure-results
+        path: VSProject/bin/Release/net9.0/allure-results
         retention-days: 30
     
     - name: Fail job if tests failed
