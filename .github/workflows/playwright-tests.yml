@@ -40,7 +40,7 @@ jobs:
         pwsh bin/Release/net9.0/playwright.ps1 install --with-deps chromium
     
     - name: Run tests
-      run: dotnet test VSProject/VSProject.csproj --no-build --configuration Release --logger "console;verbosity=detailed" --filter "Category!=accessibility"
+      run: dotnet test VSProject/VSProject.csproj --no-build --configuration Release --logger "console;verbosity=detailed"
       continue-on-error: true # Continue even if tests fail to get reports
     
     # Allure Report steps temporarily disabled due to Docker build issues
