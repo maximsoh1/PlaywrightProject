@@ -27,8 +27,8 @@ namespace VSProject.Features
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en"), "Features", "1. Authentication", "As a user\nI want to login to the shopping website\nSo that I can access my account" +
-                " and shop", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en"), "Features", "1. Authentication", "As a user\r\nI want to login to the shopping website\r\nSo that I can access my accou" +
+                "nt and shop", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
 #line 1 "Authentication.feature"
 #line hidden

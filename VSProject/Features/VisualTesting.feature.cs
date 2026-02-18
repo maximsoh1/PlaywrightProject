@@ -27,8 +27,8 @@ namespace VSProject.Features
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en"), "Features", "4. Visual Regression Testing", "  As a QA engineer\n  I want to verify visual appearance of pages\n  So that I can " +
-                "detect unintended UI changes", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en"), "Features", "4. Visual Regression Testing", "  As a QA engineer\r\n  I want to verify visual appearance of pages\r\n  So that I ca" +
+                "n detect unintended UI changes", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
 #line 1 "VisualTesting.feature"
 #line hidden
