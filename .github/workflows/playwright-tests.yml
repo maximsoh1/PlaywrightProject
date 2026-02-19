@@ -43,7 +43,7 @@ jobs:
       run: dotnet test VSProject/VSProject.csproj --no-build --configuration Release --logger "console;verbosity=detailed"
       continue-on-error: true # Continue even if tests fail to get reports
 
-    - name: Load test report history
+    - name: Get Allure history
       uses: actions/checkout@v4
       if: always()
       continue-on-error: true
@@ -51,28 +51,48 @@ jobs:
         ref: gh-pages
         path: gh-pages
 
-    - name: Build test report
-      uses: simple-elf/allure-report-action@v1.9
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       if: always()
       with:
-        gh_pages: gh-pages
-        allure_history: allure-history
-        allure_results: VSProject/bin/Release/net9.0/allure-results
+        node-version: '20'
 
-    - name: Publish test report
+    - name: Install Allure CLI
+      if: always()
+      run: npm install -g allure-commandline --save-dev
+
+    - name: Generate Allure Report
+      if: always()
+      run: |
+        mkdir -p allure-results
+        if [ -d "VSProject/bin/Release/net9.0/allure-results" ]; then
+          cp -r VSProject/bin/Release/net9.0/allure-results/* allure-results/ || true
+        fi
+        if [ -d "gh-pages/allure-history" ]; then
+          cp -r gh-pages/allure-history/* allure-results/ || true
+        fi
+        allure generate allure-results -o allure-report --clean || echo "No test results found"
+        mkdir -p allure-report/history
+        if [ -d "gh-pages/allure-history" ]; then
+          cp -r gh-pages/allure-history/* allure-report/history/ || true
+        fi
+      shell: bash
+
+    - name: Deploy Allure Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
-        publish_dir: allure-history
+        publish_dir: allure-report
+        destination_dir: allure-history
 
     - name: Upload Allure results
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: allure-results
-        path: VSProject/bin/Release/net9.0/allure-results
+        path: allure-results
         retention-days: 30
 
     - name: Upload test screenshots
