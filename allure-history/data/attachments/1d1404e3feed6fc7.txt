@@ -1,0 +1,6 @@
+Test status: Failed
+Working directory: /home/runner/work/PlaywrightProject/PlaywrightProject/VSProject/bin/Release/net9.0
+Videos directory: /home/runner/work/PlaywrightProject/PlaywrightProject/VSProject/bin/Release/net9.0/videos
+Artifacts folder: /home/runner/work/PlaywrightProject/PlaywrightProject/VSProject/bin/Release/net9.0/artifacts/VerifyGetInTouchTextIsDisplayed_20260219_150348
+Screenshot saved
+Video saved to: /home/runner/work/PlaywrightProject/PlaywrightProject/VSProject/bin/Release/net9.0/artifacts/VerifyGetInTouchTextIsDisplayed_20260219_150348/video.webm

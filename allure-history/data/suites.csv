@@ -1,29 +1,29 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"Verify user can fill form fields with valid data
-","1892","VerifyUserCanFillFormFields","VSProject","2026-02-19","passed","2026-02-19","ContactUsTest","VSProject.Tests","ContactUsTest","VerifyUserCanFillFormFields"
-"Verify that required field validation messages are displayed when form is submitted empty
-","3667","VerifyRequiredFieldValidationMessages","VSProject","2026-02-19","passed","2026-02-19","ContactUsTest","VSProject.Tests","ContactUsTest","VerifyRequiredFieldValidationMessages"
-"Verify Get in touch link is visible on homepage
-","3291","VerifyGetInTouchLinkIsVisible","VSProject","2026-02-19","passed","2026-02-19","AmadarisTests","VSProject.Tests.Amdaris","AmadarisTests","VerifyGetInTouchLinkIsVisible"
-"Verify homepage has Playwright in title and Get Started link points to intro page
-","680","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage","VSProject","2026-02-19","passed","2026-02-19","PlaywrightDevTests","VSProject.Tests.PlaywrightDev","PlaywrightDevTests","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage"
 "Verify Get Started link navigates to Installation page
-","1218","GetStartedLink","VSProject","2026-02-19","passed","2026-02-19","PlaywrightDevTests","VSProject.Tests","PlaywrightDevTests","GetStartedLink"
-"Verify Get in touch link displays correct text
-","4664","VerifyGetInTouchTextIsDisplayed","VSProject","2026-02-19","passed","2026-02-19","AmadarisTests","VSProject.Tests.Amdaris","AmadarisTests","VerifyGetInTouchTextIsDisplayed"
-"Verify that required field validation messages are displayed when form is submitted empty
-","3216","VerifyRequiredFieldValidationMessages","VSProject","2026-02-19","passed","2026-02-19","ContactUsTest","VSProject.Tests.Amdaris","ContactUsTest","VerifyRequiredFieldValidationMessages"
-"Verify Get Started link navigates to Installation page
-","1236","GetStartedLink","VSProject","2026-02-19","passed","2026-02-19","PlaywrightDevTests","VSProject.Tests.PlaywrightDev","PlaywrightDevTests","GetStartedLink"
-"Verify user can fill form fields with valid data
-","2929","VerifyUserCanFillFormFields","VSProject","2026-02-19","passed","2026-02-19","ContactUsTest","VSProject.Tests.Amdaris","ContactUsTest","VerifyUserCanFillFormFields"
-"Verify all required fields are visible on the form
-","2054","VerifyAllRequiredFieldsAreVisible","VSProject","2026-02-19","passed","2026-02-19","ContactUsTest","VSProject.Tests","ContactUsTest","VerifyAllRequiredFieldsAreVisible"
-"Verify all required fields are visible on the form
-","2637","VerifyAllRequiredFieldsAreVisible","VSProject","2026-02-19","passed","2026-02-19","ContactUsTest","VSProject.Tests.Amdaris","ContactUsTest","VerifyAllRequiredFieldsAreVisible"
-"Verify Get in touch link displays correct text
-","5596","VerifyGetInTouchTextIsDisplayed","VSProject","2026-02-19","failed","2026-02-19","AmadarisTests","VSProject.Tests","AmadarisTests","VerifyGetInTouchTextIsDisplayed"
-"Verify Get in touch link is visible on homepage
-","4174","VerifyGetInTouchLinkIsVisible","VSProject","2026-02-19","passed","2026-02-19","AmadarisTests","VSProject.Tests","AmadarisTests","VerifyGetInTouchLinkIsVisible"
+","1314","GetStartedLink","VSProject","2026-02-19","passed","2026-02-19","PlaywrightDevTests","VSProject.Tests.PlaywrightDev","PlaywrightDevTests","GetStartedLink"
 "Verify homepage has Playwright in title and Get Started link points to intro page
-","682","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage","VSProject","2026-02-19","passed","2026-02-19","PlaywrightDevTests","VSProject.Tests","PlaywrightDevTests","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage"
+","879","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage","VSProject","2026-02-19","passed","2026-02-19","PlaywrightDevTests","VSProject.Tests.PlaywrightDev","PlaywrightDevTests","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage"
+"Verify Get in touch link displays correct text
+","4632","VerifyGetInTouchTextIsDisplayed","VSProject","2026-02-19","passed","2026-02-19","AmadarisTests","VSProject.Tests.Amdaris","AmadarisTests","VerifyGetInTouchTextIsDisplayed"
+"Verify user can fill form fields with valid data
+","2931","VerifyUserCanFillFormFields","VSProject","2026-02-19","passed","2026-02-19","ContactUsTest","VSProject.Tests.Amdaris","ContactUsTest","VerifyUserCanFillFormFields"
+"Verify all required fields are visible on the form
+","2226","VerifyAllRequiredFieldsAreVisible","VSProject","2026-02-19","passed","2026-02-19","ContactUsTest","VSProject.Tests","ContactUsTest","VerifyAllRequiredFieldsAreVisible"
+"Verify that required field validation messages are displayed when form is submitted empty
+","3194","VerifyRequiredFieldValidationMessages","VSProject","2026-02-19","passed","2026-02-19","ContactUsTest","VSProject.Tests","ContactUsTest","VerifyRequiredFieldValidationMessages"
+"Verify Get in touch link is visible on homepage
+","5779","VerifyGetInTouchLinkIsVisible","VSProject","2026-02-19","passed","2026-02-19","AmadarisTests","VSProject.Tests","AmadarisTests","VerifyGetInTouchLinkIsVisible"
+"Verify Get Started link navigates to Installation page
+","1325","GetStartedLink","VSProject","2026-02-19","passed","2026-02-19","PlaywrightDevTests","VSProject.Tests","PlaywrightDevTests","GetStartedLink"
+"Verify user can fill form fields with valid data
+","2017","VerifyUserCanFillFormFields","VSProject","2026-02-19","passed","2026-02-19","ContactUsTest","VSProject.Tests","ContactUsTest","VerifyUserCanFillFormFields"
+"Verify homepage has Playwright in title and Get Started link points to intro page
+","925","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage","VSProject","2026-02-19","passed","2026-02-19","PlaywrightDevTests","VSProject.Tests","PlaywrightDevTests","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage"
+"Verify Get in touch link is visible on homepage
+","2800","VerifyGetInTouchLinkIsVisible","VSProject","2026-02-19","passed","2026-02-19","AmadarisTests","VSProject.Tests.Amdaris","AmadarisTests","VerifyGetInTouchLinkIsVisible"
+"Verify all required fields are visible on the form
+","4256","VerifyAllRequiredFieldsAreVisible","VSProject","2026-02-19","passed","2026-02-19","ContactUsTest","VSProject.Tests.Amdaris","ContactUsTest","VerifyAllRequiredFieldsAreVisible"
+"Verify that required field validation messages are displayed when form is submitted empty
+","4615","VerifyRequiredFieldValidationMessages","VSProject","2026-02-19","passed","2026-02-19","ContactUsTest","VSProject.Tests.Amdaris","ContactUsTest","VerifyRequiredFieldValidationMessages"
+"Verify Get in touch link displays correct text
+","5307","VerifyGetInTouchTextIsDisplayed","VSProject","2026-02-19","failed","2026-02-19","AmadarisTests","VSProject.Tests","AmadarisTests","VerifyGetInTouchTextIsDisplayed"

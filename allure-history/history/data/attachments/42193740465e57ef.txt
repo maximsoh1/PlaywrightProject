@@ -1,0 +1,3 @@
+Test status: Passed
+Working directory: /home/runner/work/PlaywrightProject/PlaywrightProject/VSProject/bin/Release/net9.0
+Videos directory: /home/runner/work/PlaywrightProject/PlaywrightProject/VSProject/bin/Release/net9.0/videos
