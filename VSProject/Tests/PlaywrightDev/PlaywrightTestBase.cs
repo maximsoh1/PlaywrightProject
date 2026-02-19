@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
+using Allure.NUnit;
+using Allure.NUnit.Attributes;
 
 namespace VSProject.Tests.PlaywrightDev
 {
@@ -11,6 +13,7 @@ namespace VSProject.Tests.PlaywrightDev
     /// Base class for all Playwright tests
     /// Provides video recording and artifact capture on test failure
     /// </summary>
+    [AllureNUnit]
     public abstract class PlaywrightTestBase : PageTest
     {
         /// <summary>

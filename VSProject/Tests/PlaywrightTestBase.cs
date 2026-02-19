@@ -4,9 +4,12 @@ using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
+using Allure.NUnit;
+using Allure.NUnit.Attributes;
 
 namespace VSProject.Tests
 {
+    [AllureNUnit]
     public abstract class PlaywrightTestBase : PageTest
     {
         // Настройка контекста браузера для записи видео

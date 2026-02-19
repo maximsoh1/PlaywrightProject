@@ -1,9 +1,4 @@
-using NUnit.Framework;
-using Allure.NUnit;
-using Allure.NUnit.Attributes;
+using System.Runtime.CompilerServices;
 
-// Enable Allure for all tests in this assembly
-[assembly: AllureNUnit]
-
-// Set default display name for reports
-[assembly: AllureDisplayIgnored]
+// Configure Allure results directory
+[assembly: InternalsVisibleTo("Allure.NUnit")]

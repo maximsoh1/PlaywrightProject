@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Reqnroll;
 using Reqnroll.BoDi;
+using Allure.NUnit;
 
 namespace VSProject.StepDefinitions
 {
@@ -11,6 +12,7 @@ namespace VSProject.StepDefinitions
     /// Hooks for initializing and cleaning up scenarios
     /// </summary>
     [Binding]
+    [AllureNUnit]
     public class Hooks
     {
         private readonly IObjectContainer _objectContainer;
