@@ -126,55 +126,71 @@ namespace VSProject.StepDefinitions
         [AfterScenario(Order = 99)]
         public async Task AfterScenario()
         {
-            // Update Allure test status
-            if (_scenarioContext.TestError != null)
+            try
             {
-                AllureLifecycle.Instance.UpdateTestCase(tc =>
+                // Update Allure test status
+                if (_scenarioContext.TestError != null)
                 {
-                    tc.status = Status.failed;
-                    tc.statusDetails = new StatusDetails
+                    AllureLifecycle.Instance.UpdateTestCase(tc =>
                     {
-                        message = _scenarioContext.TestError.Message,
-                        trace = _scenarioContext.TestError.StackTrace
-                    };
-                });
-
-                // Attach screenshot if available
-                if (_page != null)
-                {
-                    try
-                    {
-                        var screenshot = await _page.ScreenshotAsync();
-                        var screenshotPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "allure-results", $"screenshot-{Guid.NewGuid()}.png");
-                        Directory.CreateDirectory(Path.GetDirectoryName(screenshotPath));
-                        File.WriteAllBytes(screenshotPath, screenshot);
-
-                        AllureLifecycle.Instance.UpdateTestCase(tc =>
+                        tc.status = Status.failed;
+                        tc.statusDetails = new StatusDetails
                         {
-                            tc.attachments.Add(new Attachment
+                            message = _scenarioContext.TestError.Message,
+                            trace = _scenarioContext.TestError.StackTrace
+                        };
+                    });
+
+                    // Attach screenshot if available
+                    if (_page != null)
+                    {
+                        try
+                        {
+                            var screenshot = await _page.ScreenshotAsync();
+                            var screenshotPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "allure-results", $"screenshot-{Guid.NewGuid()}.png");
+                            Directory.CreateDirectory(Path.GetDirectoryName(screenshotPath));
+                            File.WriteAllBytes(screenshotPath, screenshot);
+
+                            AllureLifecycle.Instance.UpdateTestCase(tc =>
                             {
-                                name = "Screenshot on failure",
-                                type = "image/png",
-                                source = Path.GetFileName(screenshotPath)
+                                tc.attachments.Add(new Attachment
+                                {
+                                    name = "Screenshot on failure",
+                                    type = "image/png",
+                                    source = Path.GetFileName(screenshotPath)
+                                });
                             });
-                        });
+                        }
+                        catch { /* Ignore screenshot errors */ }
                     }
-                    catch { /* Ignore screenshot errors */ }
+                }
+                else
+                {
+                    AllureLifecycle.Instance.UpdateTestCase(tc => tc.status = Status.passed);
+                }
+
+                // Stop and write test case
+                AllureLifecycle.Instance.StopTestCase();
+                AllureLifecycle.Instance.WriteTestCase();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Warning: Allure reporting error: {ex.Message}");
+            }
+            finally
+            {
+                // Always close resources
+                try
+                {
+                    await _page?.CloseAsync();
+                    await _browser?.CloseAsync();
+                    _playwright?.Dispose();
+                }
+                catch
+                {
+                    /* Ignore cleanup errors */
                 }
             }
-            else
-            {
-                AllureLifecycle.Instance.UpdateTestCase(tc => tc.status = Status.passed);
-            }
-
-            // Stop and write test case
-            AllureLifecycle.Instance.StopTestCase();
-            AllureLifecycle.Instance.WriteTestCase();
-
-            // Close resources
-            await _page?.CloseAsync();
-            await _browser?.CloseAsync();
-            _playwright?.Dispose();
         }
     }
 }
