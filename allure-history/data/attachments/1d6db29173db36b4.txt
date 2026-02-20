@@ -1,0 +1,6 @@
+Test status: Failed
+Working directory: /home/runner/work/PlaywrightProject/PlaywrightProject/VSProject/bin/Release/net9.0
+Videos directory: /home/runner/work/PlaywrightProject/PlaywrightProject/VSProject/bin/Release/net9.0/videos
+Artifacts folder: /home/runner/work/PlaywrightProject/PlaywrightProject/VSProject/bin/Release/net9.0/artifacts/VerifyRequiredFieldValidationMessages_20260220_145441
+Screenshot saved
+Video saved to: /home/runner/work/PlaywrightProject/PlaywrightProject/VSProject/bin/Release/net9.0/artifacts/VerifyRequiredFieldValidationMessages_20260220_145441/video.webm
