@@ -159,8 +159,10 @@ namespace VSProject.StepDefinitions
                 // Always close resources
                 try
                 {
-                    await _page?.CloseAsync();
-                    await _browser?.CloseAsync();
+                    if (_page != null)
+                        await _page.CloseAsync();
+                    if (_browser != null)
+                        await _browser.CloseAsync();
                     _playwright?.Dispose();
                 }
                 catch

@@ -50,6 +50,23 @@ Generated\ Files/
 TestResult.xml
 nunit-*.xml
 
+# Visual regression testing baselines (local only)
+**/VisualBaselines/*.png
+**/VisualBaselines/*-actual.png
+**/VisualBaselines/*-diff.png
+!**/VisualBaselines/.gitkeep
+
+# Allure results (generated)
+**/allure-results/
+**/allure-report/
+allure-results/
+allure-report/
+
+# Playwright artifacts
+**/videos/
+**/screenshots/
+**/artifacts/
+
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/
