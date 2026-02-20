@@ -378,10 +378,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/.github/CHEATSHEET.md
-/.github/CI_CD_SETUP_COMPLETE.md
-/.github/GITHUB_ACTIONS_GUIDE.md
-/.github/PRE_RELEASE_CHECKLIST.md
-/.github/pull_request_template.md
-/.github/QUICKSTART.md
-/.github/WORKFLOWS_DIAGRAM.md
