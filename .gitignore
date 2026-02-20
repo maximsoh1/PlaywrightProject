@@ -378,3 +378,11 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Documentation files (keep only code)
+*.md
+!README.md
+
+# Solution files (not needed - can open .csproj directly)
+*.sln
+*.slnx
