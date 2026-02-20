@@ -16,17 +16,19 @@ namespace VSProject.StepDefinitions
     {
         private readonly IObjectContainer _objectContainer;
         private readonly ScenarioContext _scenarioContext;
+        private readonly FeatureContext _featureContext;
         private IPlaywright _playwright;
         private IBrowser _browser;
         private IPage _page;
 
         private static bool _allureResultsCleared = false;
 
-        // Dependency Injection: Reqnroll provides IObjectContainer and ScenarioContext
-        public Hooks(IObjectContainer objectContainer, ScenarioContext scenarioContext)
+        // Dependency Injection: Reqnroll provides IObjectContainer, ScenarioContext and FeatureContext
+        public Hooks(IObjectContainer objectContainer, ScenarioContext scenarioContext, FeatureContext featureContext)
         {
             _objectContainer = objectContainer;
             _scenarioContext = scenarioContext;
+            _featureContext = featureContext;
         }
 
         /// <summary>
@@ -78,11 +80,11 @@ namespace VSProject.StepDefinitions
             {
                 uuid = Guid.NewGuid().ToString(),
                 name = _scenarioContext.ScenarioInfo.Title,
-                fullName = $"{_scenarioContext.ScenarioInfo.Title}",
+                fullName = $"{_featureContext.FeatureInfo.Title}.{_scenarioContext.ScenarioInfo.Title}",
                 labels = new System.Collections.Generic.List<Label>
                 {
-                    Label.Feature(_scenarioContext.FeatureInfo.Title),
-                    Label.Suite(_scenarioContext.FeatureInfo.Title),
+                    Label.Feature(_featureContext.FeatureInfo.Title),
+                    Label.Suite(_featureContext.FeatureInfo.Title),
                     Label.Story(_scenarioContext.ScenarioInfo.Title)
                 }
             };
@@ -146,11 +148,19 @@ namespace VSProject.StepDefinitions
                     try
                     {
                         var screenshot = await _page.ScreenshotAsync();
-                        AllureLifecycle.Instance.AddAttachment(
-                            "Screenshot on failure",
-                            "image/png",
-                            screenshot
-                        );
+                        var screenshotPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "allure-results", $"screenshot-{Guid.NewGuid()}.png");
+                        Directory.CreateDirectory(Path.GetDirectoryName(screenshotPath));
+                        File.WriteAllBytes(screenshotPath, screenshot);
+
+                        AllureLifecycle.Instance.UpdateTestCase(tc =>
+                        {
+                            tc.attachments.Add(new Attachment
+                            {
+                                name = "Screenshot on failure",
+                                type = "image/png",
+                                source = Path.GetFileName(screenshotPath)
+                            });
+                        });
                     }
                     catch { /* Ignore screenshot errors */ }
                 }
