@@ -1,26 +1,25 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11505.172 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSProject", "VSProject\VSProject.csproj", "{GUID}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSProject", "VSProject\VSProject.csproj", "{FA28C8A1-4840-43A9-80A5-00E968378BA7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{GUID2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6C0237E9-1D52-4445-8D09-6127D90B222F}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		README.md = README.md
-		generate-allure.ps1 = generate-allure.ps1
-		open-allure.ps1 = open-allure.ps1
-		index.html = index.html
 		allureConfig.json = allureConfig.json
+		generate-allure.ps1 = generate-allure.ps1
+		index.html = index.html
+		open-allure.ps1 = open-allure.ps1
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{GUID3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{510FF916-C059-42EE-AD03-D4DF913D1F43}"
 	ProjectSection(SolutionItems) = preProject
 		.github\copilot-instructions.md = .github\copilot-instructions.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{GUID4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{1A471FD4-D1AC-4013-B849-7BF138DC34C1}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\playwright-tests.yml = .github\workflows\playwright-tests.yml
 		.github\workflows\README.md = .github\workflows\README.md
@@ -32,12 +31,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{GUID}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA28C8A1-4840-43A9-80A5-00E968378BA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA28C8A1-4840-43A9-80A5-00E968378BA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA28C8A1-4840-43A9-80A5-00E968378BA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA28C8A1-4840-43A9-80A5-00E968378BA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{GUID4} = {GUID3}
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
