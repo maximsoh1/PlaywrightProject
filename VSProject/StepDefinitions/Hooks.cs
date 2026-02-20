@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Reqnroll;
 using Reqnroll.BoDi;
-using Allure.Net.Commons;
+using System.Text.Json;
+using System.Collections.Generic;
 
 namespace VSProject.StepDefinitions
 {
@@ -20,6 +21,8 @@ namespace VSProject.StepDefinitions
         private IPlaywright _playwright;
         private IBrowser _browser;
         private IPage _page;
+        private DateTime _scenarioStartTime;
+        private string _testUuid;
 
         private static bool _allureResultsCleared = false;
 
@@ -75,27 +78,8 @@ namespace VSProject.StepDefinitions
         [BeforeScenario(Order = 1)]
         public async Task BeforeScenario()
         {
-            // Start Allure test case
-            var testResult = new TestResult
-            {
-                uuid = Guid.NewGuid().ToString(),
-                name = _scenarioContext.ScenarioInfo.Title,
-                fullName = $"{_featureContext.FeatureInfo.Title}.{_scenarioContext.ScenarioInfo.Title}",
-                labels = new System.Collections.Generic.List<Label>
-                {
-                    Label.Feature(_featureContext.FeatureInfo.Title),
-                    Label.Suite(_featureContext.FeatureInfo.Title),
-                    Label.Story(_scenarioContext.ScenarioInfo.Title)
-                }
-            };
-
-            // Add tags as labels
-            foreach (var tag in _scenarioContext.ScenarioInfo.Tags)
-            {
-                testResult.labels.Add(Label.Tag(tag));
-            }
-
-            AllureLifecycle.Instance.StartTestCase(testResult);
+            _testUuid = Guid.NewGuid().ToString();
+            _scenarioStartTime = DateTime.UtcNow;
 
             // Create Playwright instance
             _playwright = await Playwright.CreateAsync();
@@ -128,54 +112,47 @@ namespace VSProject.StepDefinitions
         {
             try
             {
-                // Update Allure test status
-                if (_scenarioContext.TestError != null)
+                var stop = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                var start = new DateTimeOffset(_scenarioStartTime).ToUnixTimeMilliseconds();
+
+                // Create Allure result JSON manually
+                var allureResult = new
                 {
-                    AllureLifecycle.Instance.UpdateTestCase(tc =>
+                    uuid = _testUuid,
+                    historyId = $"{_featureContext.FeatureInfo.Title}.{_scenarioContext.ScenarioInfo.Title}",
+                    fullName = $"{_featureContext.FeatureInfo.Title}.{_scenarioContext.ScenarioInfo.Title}",
+                    name = _scenarioContext.ScenarioInfo.Title,
+                    status = _scenarioContext.TestError == null ? "passed" : "failed",
+                    statusDetails = _scenarioContext.TestError != null ? new
                     {
-                        tc.status = Status.failed;
-                        tc.statusDetails = new StatusDetails
-                        {
-                            message = _scenarioContext.TestError.Message,
-                            trace = _scenarioContext.TestError.StackTrace
-                        };
-                    });
-
-                    // Attach screenshot if available
-                    if (_page != null)
+                        message = _scenarioContext.TestError.Message,
+                        trace = _scenarioContext.TestError.StackTrace
+                    } : null,
+                    start,
+                    stop,
+                    labels = new[]
                     {
-                        try
-                        {
-                            var screenshot = await _page.ScreenshotAsync();
-                            var screenshotPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "allure-results", $"screenshot-{Guid.NewGuid()}.png");
-                            Directory.CreateDirectory(Path.GetDirectoryName(screenshotPath));
-                            File.WriteAllBytes(screenshotPath, screenshot);
-
-                            AllureLifecycle.Instance.UpdateTestCase(tc =>
-                            {
-                                tc.attachments.Add(new Attachment
-                                {
-                                    name = "Screenshot on failure",
-                                    type = "image/png",
-                                    source = Path.GetFileName(screenshotPath)
-                                });
-                            });
-                        }
-                        catch { /* Ignore screenshot errors */ }
+                        new { name = "feature", value = _featureContext.FeatureInfo.Title },
+                        new { name = "suite", value = _featureContext.FeatureInfo.Title },
+                        new { name = "story", value = _scenarioContext.ScenarioInfo.Title },
+                        new { name = "framework", value = "reqnroll" },
+                        new { name = "language", value = "C#" }
                     }
-                }
-                else
-                {
-                    AllureLifecycle.Instance.UpdateTestCase(tc => tc.status = Status.passed);
-                }
+                };
 
-                // Stop and write test case
-                AllureLifecycle.Instance.StopTestCase();
-                AllureLifecycle.Instance.WriteTestCase();
+                // Write to allure-results directory
+                var resultsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "allure-results");
+                Directory.CreateDirectory(resultsPath);
+
+                var resultFileName = Path.Combine(resultsPath, $"{_testUuid}-result.json");
+                var json = JsonSerializer.Serialize(allureResult, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(resultFileName, json);
+
+                Console.WriteLine($"✓ Allure result saved: {Path.GetFileName(resultFileName)}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Warning: Allure reporting error: {ex.Message}");
+                Console.WriteLine($"Warning: Could not save Allure result: {ex.Message}");
             }
             finally
             {
