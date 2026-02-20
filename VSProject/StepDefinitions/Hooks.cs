@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Reqnroll;
 using Reqnroll.BoDi;
+using Allure.Net.Commons;
 
 namespace VSProject.StepDefinitions
 {
@@ -14,16 +15,18 @@ namespace VSProject.StepDefinitions
     public class Hooks
     {
         private readonly IObjectContainer _objectContainer;
+        private readonly ScenarioContext _scenarioContext;
         private IPlaywright _playwright;
         private IBrowser _browser;
         private IPage _page;
-        
+
         private static bool _allureResultsCleared = false;
 
-        // Dependency Injection: Reqnroll provides IObjectContainer
-        public Hooks(IObjectContainer objectContainer)
+        // Dependency Injection: Reqnroll provides IObjectContainer and ScenarioContext
+        public Hooks(IObjectContainer objectContainer, ScenarioContext scenarioContext)
         {
             _objectContainer = objectContainer;
+            _scenarioContext = scenarioContext;
         }
 
         /// <summary>
@@ -67,9 +70,31 @@ namespace VSProject.StepDefinitions
         /// <summary>
         /// Executes before each scenario
         /// </summary>
-        [BeforeScenario]
+        [BeforeScenario(Order = 1)]
         public async Task BeforeScenario()
         {
+            // Start Allure test case
+            var testResult = new TestResult
+            {
+                uuid = Guid.NewGuid().ToString(),
+                name = _scenarioContext.ScenarioInfo.Title,
+                fullName = $"{_scenarioContext.ScenarioInfo.Title}",
+                labels = new System.Collections.Generic.List<Label>
+                {
+                    Label.Feature(_scenarioContext.FeatureInfo.Title),
+                    Label.Suite(_scenarioContext.FeatureInfo.Title),
+                    Label.Story(_scenarioContext.ScenarioInfo.Title)
+                }
+            };
+
+            // Add tags as labels
+            foreach (var tag in _scenarioContext.ScenarioInfo.Tags)
+            {
+                testResult.labels.Add(Label.Tag(tag));
+            }
+
+            AllureLifecycle.Instance.StartTestCase(testResult);
+
             // Create Playwright instance
             _playwright = await Playwright.CreateAsync();
 
@@ -99,9 +124,46 @@ namespace VSProject.StepDefinitions
         /// <summary>
         /// Executes after each scenario
         /// </summary>
-        [AfterScenario]
+        [AfterScenario(Order = 99)]
         public async Task AfterScenario()
         {
+            // Update Allure test status
+            if (_scenarioContext.TestError != null)
+            {
+                AllureLifecycle.Instance.UpdateTestCase(tc =>
+                {
+                    tc.status = Status.failed;
+                    tc.statusDetails = new StatusDetails
+                    {
+                        message = _scenarioContext.TestError.Message,
+                        trace = _scenarioContext.TestError.StackTrace
+                    };
+                });
+
+                // Attach screenshot if available
+                if (_page != null)
+                {
+                    try
+                    {
+                        var screenshot = await _page.ScreenshotAsync();
+                        AllureLifecycle.Instance.AddAttachment(
+                            "Screenshot on failure",
+                            "image/png",
+                            screenshot
+                        );
+                    }
+                    catch { /* Ignore screenshot errors */ }
+                }
+            }
+            else
+            {
+                AllureLifecycle.Instance.UpdateTestCase(tc => tc.status = Status.passed);
+            }
+
+            // Stop and write test case
+            AllureLifecycle.Instance.StopTestCase();
+            AllureLifecycle.Instance.WriteTestCase();
+
             // Close resources
             await _page?.CloseAsync();
             await _browser?.CloseAsync();
