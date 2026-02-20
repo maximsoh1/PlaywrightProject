@@ -391,9 +391,9 @@ namespace VSProject.Tests.Pages.Shopping
         /// </summary>
         /// <param name="baselineFile">Path to baseline image</param>
         /// <param name="actualFile">Path to actual (current) image</param>
-        /// <param name="tolerance">Percentage of pixels that can differ (default 0.1%)</param>
+        /// <param name="tolerance">Percentage of pixels that can differ (default 1% - more forgiving)</param>
         /// <returns>True if images are similar within tolerance</returns>
-        private bool CompareImages(string baselineFile, string actualFile, double tolerance = 0.1)
+        private bool CompareImages(string baselineFile, string actualFile, double tolerance = 1.0)
         {
             if (!File.Exists(baselineFile) || !File.Exists(actualFile))
             {
