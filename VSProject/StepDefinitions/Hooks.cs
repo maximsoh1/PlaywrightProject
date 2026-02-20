@@ -100,13 +100,10 @@ namespace VSProject.StepDefinitions
             // Create Playwright instance
             _playwright = await Playwright.CreateAsync();
 
-            // Check if running in CI environment
-            bool isCI = Environment.GetEnvironmentVariable("CI") == "true" ||
-                       Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true";
-
+            // Always use headless mode to avoid browser windows staying open
             _browser = await _playwright.Chromium.LaunchAsync(new()
             {
-                Headless = isCI // true in CI, false locally
+                Headless = true // Always headless - no browser windows!
             });
 
             // Create context with video recording
