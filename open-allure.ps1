@@ -3,35 +3,35 @@
 
 Write-Host "`n📊 Opening Allure Report..." -ForegroundColor Cyan
 
-# Try Debug first (Test Explorer default), then Release
-$allureResults = ""
-$debugPath = "VSProject/bin/Debug/net9.0/allure-results"
-$releasePath = "VSProject/bin/Release/net9.0/allure-results"
+# Try Release first, then Debug
+$allureResults = $null
+$possiblePaths = @(
+    "VSProject/bin/Release/net9.0/allure-results",
+    "VSProject/bin/Debug/net9.0/allure-results",
+    "VSProject/bin/Release/net10.0/allure-results",
+    "VSProject/bin/Debug/net10.0/allure-results"
+)
 
-if (Test-Path $debugPath) {
-    $debugFiles = Get-ChildItem -Path $debugPath -Filter "*-result.json" -ErrorAction SilentlyContinue
-    if ($debugFiles.Count -gt 0) {
-        $allureResults = $debugPath
-        Write-Host "✅ Found $($debugFiles.Count) test result(s) in Debug" -ForegroundColor Green
+foreach ($path in $possiblePaths) {
+    if (Test-Path $path) {
+        $resultFiles = Get-ChildItem -Path $path -Filter "*-result.json" -ErrorAction SilentlyContinue
+        if ($resultFiles.Count -gt 0) {
+            $allureResults = $path
+            Write-Host "✅ Found $($resultFiles.Count) test result(s) in:" -ForegroundColor Green
+            Write-Host "   $path" -ForegroundColor DarkGray
+            break
+        }
     }
 }
 
-if ($allureResults -eq "" -and (Test-Path $releasePath)) {
-    $releaseFiles = Get-ChildItem -Path $releasePath -Filter "*-result.json" -ErrorAction SilentlyContinue
-    if ($releaseFiles.Count -gt 0) {
-        $allureResults = $releasePath
-        Write-Host "✅ Found $($releaseFiles.Count) test result(s) in Release" -ForegroundColor Green
-    }
-}
-
-if ($allureResults -eq "") {
+if ($null -eq $allureResults) {
     Write-Host "❌ No test results found!" -ForegroundColor Red
-    Write-Host "   Please run tests in Test Explorer first" -ForegroundColor Yellow
-    Write-Host "`n   📝 How to run tests:" -ForegroundColor Cyan
-    Write-Host "   1. Open Test Explorer: View → Test Explorer (Ctrl+E, T)" -ForegroundColor DarkGray
-    Write-Host "   2. Click 'Run All Tests' button (▶️)" -ForegroundColor DarkGray
+    Write-Host "`n💡 Please run tests first:" -ForegroundColor Yellow
+    Write-Host "   1. Open Test Explorer (Ctrl+E, T)" -ForegroundColor DarkGray
+    Write-Host "   2. Click 'Run All' or run specific tests" -ForegroundColor DarkGray
     Write-Host "   3. Wait for tests to complete" -ForegroundColor DarkGray
-    Write-Host "   4. Run this script again`n" -ForegroundColor DarkGray
+    Write-Host "   4. Run this script again" -ForegroundColor DarkGray
+    Write-Host ""
     Read-Host "Press Enter to exit"
     exit 1
 }
