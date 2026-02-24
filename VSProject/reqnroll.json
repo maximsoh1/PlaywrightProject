@@ -1,0 +1,32 @@
+{
+  "language": {
+    "feature": "en"
+  },
+  "bindingCulture": {
+    "name": "en-US"
+  },
+  "runtime": {
+    "stopAtFirstError": false,
+    "missingOrPendingStepsOutcome": "Inconclusive"
+  },
+  "trace": {
+    "traceSuccessfulSteps": true,
+    "traceTimings": true,
+    "minTracedDuration": "0:0:0.1",
+    "stepDefinitionSkeletonStyle": "RegexAttribute"
+  },
+  "unitTestProvider": {
+    "generatorProvider": "nunit",
+    "runtimeProvider": "nunit"
+  },
+  "generator": {
+    "allowDebugGeneratedFiles": false,
+    "allowRowTests": true,
+    "generateAsyncTests": true,
+    "addNonParallelizableMarkerForTags": [],
+    "featuresDirectory": "Features"
+  },
+  "nunit": {
+    "order": true
+  }
+}

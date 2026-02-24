@@ -2,7 +2,7 @@
 <RunSettings>
 	<!-- NUnit adapter -->
 	<NUnit>
-		<NumberOfTestWorkers>24</NumberOfTestWorkers> <!-- для отладки -->
+		<NumberOfTestWorkers>24</NumberOfTestWorkers> <!-- for debugging -->
 	</NUnit>
 	<!-- General run configuration -->
 	<RunConfiguration>
@@ -10,6 +10,8 @@
 			<!-- For debugging selectors, it's recommend to set the following environment variable -->
 			<DEBUG>pw:api</DEBUG>
 			<!--<PWDEBUG>1</PWDEBUG> --><!-- опционально: откроет debug UI -->
+			<!-- Allure Report -->
+			<ALLURE_RESULTS_DIRECTORY>allure-results</ALLURE_RESULTS_DIRECTORY>
 		</EnvironmentVariables>
 	</RunConfiguration>
 	<!-- Playwright -->
