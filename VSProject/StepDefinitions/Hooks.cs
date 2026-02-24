@@ -18,11 +18,11 @@ namespace VSProject.StepDefinitions
         private readonly IObjectContainer _objectContainer;
         private readonly ScenarioContext _scenarioContext;
         private readonly FeatureContext _featureContext;
-        private IPlaywright _playwright;
-        private IBrowser _browser;
-        private IPage _page;
+        private IPlaywright? _playwright;
+        private IBrowser? _browser;
+        private IPage? _page;
         private DateTime _scenarioStartTime;
-        private string _testUuid;
+        private string _testUuid = string.Empty;
 
         private static bool _allureResultsCleared = false;
 
