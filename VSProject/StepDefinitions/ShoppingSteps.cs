@@ -125,9 +125,9 @@ namespace VSProject.StepDefinitions
         // Helper class for table mapping
         public class CustomerInfo
         {
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public string PostalCode { get; set; }
+            public string FirstName { get; set; } = string.Empty;
+            public string LastName { get; set; } = string.Empty;
+            public string PostalCode { get; set; } = string.Empty;
         }
     }
 }
