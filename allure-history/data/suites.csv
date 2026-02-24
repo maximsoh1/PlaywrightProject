@@ -1,50 +1,50 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","1770","8. Button hover states","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
-"Verify homepage has Playwright in title and Get Started link points to intro page
-","912","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage","VSProject","2026-02-24","passed","2026-02-24","PlaywrightDevTests","VSProject.Tests.PlaywrightDev","PlaywrightDevTests","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage"
-"Verify Get in touch link is visible on homepage
-","3249","VerifyGetInTouchLinkIsVisible","VSProject","2026-02-24","passed","2026-02-24","AmadarisTests","VSProject.Tests","AmadarisTests","VerifyGetInTouchLinkIsVisible"
-"Verify Get in touch link is visible on homepage
-","3973","VerifyGetInTouchLinkIsVisible","VSProject","2026-02-24","passed","2026-02-24","AmadarisTests","VSProject.Tests.Amdaris","AmadarisTests","VerifyGetInTouchLinkIsVisible"
-"","1526","2. Products page visual appearance","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
-"Verify user can fill form fields with valid data
-","2145","VerifyUserCanFillFormFields","VSProject","2026-02-24","passed","2026-02-24","ContactUsTest","VSProject.Tests.Amdaris","ContactUsTest","VerifyUserCanFillFormFields"
-"","639","6. Keyboard navigation works correctly","","2026-02-24","passed","2026-02-24","","3. Accessibility Compliance","",""
-"Verify that required field validation messages are displayed when form is submitted empty
-","3775","VerifyRequiredFieldValidationMessages","VSProject","2026-02-24","passed","2026-02-24","ContactUsTest","VSProject.Tests.Amdaris","ContactUsTest","VerifyRequiredFieldValidationMessages"
-"","665","5. All form fields have proper labels","","2026-02-24","passed","2026-02-24","","3. Accessibility Compliance","",""
-"Verify user can fill form fields with valid data
-","2298","VerifyUserCanFillFormFields","VSProject","2026-02-24","passed","2026-02-24","ContactUsTest","VSProject.Tests","ContactUsTest","VerifyUserCanFillFormFields"
-"","908","2. Login with invalid credentials","","2026-02-24","passed","2026-02-24","","1. Authentication","",""
-"Verify Get Started link navigates to Installation page
-","1370","GetStartedLink","VSProject","2026-02-24","passed","2026-02-24","PlaywrightDevTests","VSProject.Tests","PlaywrightDevTests","GetStartedLink"
-"","1043","5. Complete shopping journey","","2026-02-24","passed","2026-02-24","","2. Complete Shopping Flow","",""
-"","938","7. Header and footer elements","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
-"Verify Get in touch link displays correct text
-","3499","VerifyGetInTouchTextIsDisplayed","VSProject","2026-02-24","passed","2026-02-24","AmadarisTests","VSProject.Tests.Amdaris","AmadarisTests","VerifyGetInTouchTextIsDisplayed"
-"","975","2. Add multiple products to cart","","2026-02-24","passed","2026-02-24","","2. Complete Shopping Flow","",""
-"Verify Get Started link navigates to Installation page
-","1377","GetStartedLink","VSProject","2026-02-24","passed","2026-02-24","PlaywrightDevTests","VSProject.Tests.PlaywrightDev","PlaywrightDevTests","GetStartedLink"
 "Verify all required fields are visible on the form
-","1812","VerifyAllRequiredFieldsAreVisible","VSProject","2026-02-24","passed","2026-02-24","ContactUsTest","VSProject.Tests","ContactUsTest","VerifyAllRequiredFieldsAreVisible"
-"","2203","6. Products page on tablet viewport","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
-"Verify all required fields are visible on the form
-","6433","VerifyAllRequiredFieldsAreVisible","VSProject","2026-02-24","passed","2026-02-24","ContactUsTest","VSProject.Tests.Amdaris","ContactUsTest","VerifyAllRequiredFieldsAreVisible"
-"","1349","4. Shopping cart visual appearance","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
-"","951","1. Add single product to cart","","2026-02-24","passed","2026-02-24","","2. Complete Shopping Flow","",""
-"","1386","1. Login page visual appearance","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
-"","2041","4. Checkout page meets WCAG standards","","2026-02-24","failed","2026-02-24","","3. Accessibility Compliance","",""
-"Verify that required field validation messages are displayed when form is submitted empty
-","3412","VerifyRequiredFieldValidationMessages","VSProject","2026-02-24","passed","2026-02-24","ContactUsTest","VSProject.Tests","ContactUsTest","VerifyRequiredFieldValidationMessages"
-"","900","3. View cart with added products","","2026-02-24","passed","2026-02-24","","2. Complete Shopping Flow","",""
+","2028","VerifyAllRequiredFieldsAreVisible","VSProject","2026-02-24","passed","2026-02-24","ContactUsTest","VSProject.Tests","ContactUsTest","VerifyAllRequiredFieldsAreVisible"
+"Verify user can fill form fields with valid data
+","3189","VerifyUserCanFillFormFields","VSProject","2026-02-24","passed","2026-02-24","ContactUsTest","VSProject.Tests","ContactUsTest","VerifyUserCanFillFormFields"
+"","987","2. Add multiple products to cart","","2026-02-24","passed","2026-02-24","","2. Complete Shopping Flow","",""
 "Verify homepage has Playwright in title and Get Started link points to intro page
-","873","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage","VSProject","2026-02-24","passed","2026-02-24","PlaywrightDevTests","VSProject.Tests","PlaywrightDevTests","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage"
-"","1785","1. Login page meets WCAG standards","","2026-02-24","failed","2026-02-24","","3. Accessibility Compliance","",""
-"","1866","5. Login page on mobile viewport","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
-"","962","3. Product card component appearance","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
-"","1992","3. Shopping cart page meets WCAG standards","","2026-02-24","failed","2026-02-24","","3. Accessibility Compliance","",""
+","866","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage","VSProject","2026-02-24","passed","2026-02-24","PlaywrightDevTests","VSProject.Tests.PlaywrightDev","PlaywrightDevTests","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage"
+"Verify that required field validation messages are displayed when form is submitted empty
+","3395","VerifyRequiredFieldValidationMessages","VSProject","2026-02-24","passed","2026-02-24","ContactUsTest","VSProject.Tests","ContactUsTest","VerifyRequiredFieldValidationMessages"
+"Verify homepage has Playwright in title and Get Started link points to intro page
+","843","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage","VSProject","2026-02-24","passed","2026-02-24","PlaywrightDevTests","VSProject.Tests","PlaywrightDevTests","HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage"
+"","1261","1. Successful login with valid credentials","","2026-02-24","passed","2026-02-24","","1. Authentication","",""
+"Verify Get in touch link is visible on homepage
+","3011","VerifyGetInTouchLinkIsVisible","VSProject","2026-02-24","passed","2026-02-24","AmadarisTests","VSProject.Tests.Amdaris","AmadarisTests","VerifyGetInTouchLinkIsVisible"
+"Verify Get Started link navigates to Installation page
+","1263","GetStartedLink","VSProject","2026-02-24","passed","2026-02-24","PlaywrightDevTests","VSProject.Tests","PlaywrightDevTests","GetStartedLink"
+"","625","6. Keyboard navigation works correctly","","2026-02-24","passed","2026-02-24","","3. Accessibility Compliance","",""
+"","807","2. Login with invalid credentials","","2026-02-24","passed","2026-02-24","","1. Authentication","",""
+"","880","3. View cart with added products","","2026-02-24","passed","2026-02-24","","2. Complete Shopping Flow","",""
+"Verify Get Started link navigates to Installation page
+","1247","GetStartedLink","VSProject","2026-02-24","passed","2026-02-24","PlaywrightDevTests","VSProject.Tests.PlaywrightDev","PlaywrightDevTests","GetStartedLink"
+"","1430","4. Shopping cart visual appearance","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
+"","1735","1. Login page meets WCAG standards","","2026-02-24","failed","2026-02-24","","3. Accessibility Compliance","",""
+"Verify Get in touch link is visible on homepage
+","7139","VerifyGetInTouchLinkIsVisible","VSProject","2026-02-24","passed","2026-02-24","AmadarisTests","VSProject.Tests","AmadarisTests","VerifyGetInTouchLinkIsVisible"
+"","1953","4. Checkout page meets WCAG standards","","2026-02-24","failed","2026-02-24","","3. Accessibility Compliance","",""
+"","1776","8. Button hover states","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
+"Verify that required field validation messages are displayed when form is submitted empty
+","2596","VerifyRequiredFieldValidationMessages","VSProject","2026-02-24","passed","2026-02-24","ContactUsTest","VSProject.Tests.Amdaris","ContactUsTest","VerifyRequiredFieldValidationMessages"
+"","993","7. Header and footer elements","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
+"","1027","5. Complete shopping journey","","2026-02-24","passed","2026-02-24","","2. Complete Shopping Flow","",""
+"","639","5. All form fields have proper labels","","2026-02-24","passed","2026-02-24","","3. Accessibility Compliance","",""
+"","1919","3. Shopping cart page meets WCAG standards","","2026-02-24","failed","2026-02-24","","3. Accessibility Compliance","",""
+"","872","4. Remove product from cart","","2026-02-24","passed","2026-02-24","","2. Complete Shopping Flow","",""
+"","2168","2. Products page meets WCAG standards","","2026-02-24","failed","2026-02-24","","3. Accessibility Compliance","",""
+"","1425","2. Products page visual appearance","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
+"","889","1. Add single product to cart","","2026-02-24","passed","2026-02-24","","2. Complete Shopping Flow","",""
+"Verify all required fields are visible on the form
+","1662","VerifyAllRequiredFieldsAreVisible","VSProject","2026-02-24","passed","2026-02-24","ContactUsTest","VSProject.Tests.Amdaris","ContactUsTest","VerifyAllRequiredFieldsAreVisible"
+"","1663","5. Login page on mobile viewport","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
+"Verify user can fill form fields with valid data
+","2800","VerifyUserCanFillFormFields","VSProject","2026-02-24","passed","2026-02-24","ContactUsTest","VSProject.Tests.Amdaris","ContactUsTest","VerifyUserCanFillFormFields"
+"","1941","6. Products page on tablet viewport","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
+"","1235","1. Login page visual appearance","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
 "Verify Get in touch link displays correct text
-","5689","VerifyGetInTouchTextIsDisplayed","VSProject","2026-02-24","failed","2026-02-24","AmadarisTests","VSProject.Tests","AmadarisTests","VerifyGetInTouchTextIsDisplayed"
-"","1087","1. Successful login with valid credentials","","2026-02-24","passed","2026-02-24","","1. Authentication","",""
-"","940","4. Remove product from cart","","2026-02-24","passed","2026-02-24","","2. Complete Shopping Flow","",""
-"","2204","2. Products page meets WCAG standards","","2026-02-24","failed","2026-02-24","","3. Accessibility Compliance","",""
+","4190","VerifyGetInTouchTextIsDisplayed","VSProject","2026-02-24","passed","2026-02-24","AmadarisTests","VSProject.Tests.Amdaris","AmadarisTests","VerifyGetInTouchTextIsDisplayed"
+"Verify Get in touch link displays correct text
+","8204","VerifyGetInTouchTextIsDisplayed","VSProject","2026-02-24","failed","2026-02-24","AmadarisTests","VSProject.Tests","AmadarisTests","VerifyGetInTouchTextIsDisplayed"
+"","839","3. Product card component appearance","","2026-02-24","passed","2026-02-24","","4. Visual Regression Testing","",""
